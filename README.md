@@ -6,6 +6,7 @@
 | --------------------- | ------ | ----------- |
 | nickname              | string | null: false |
 | email                 | string | null: false, unique: true |
+| encrypted_password    | string | null: false |
 | last_name             | string | null: false |
 | first_name            | string | null: false |
 | last_name_kana        | string | null: false |
@@ -37,7 +38,7 @@
 
 | Column                 | Type       | Options     |
 | ---------------------- | ---------- | ----------- |
-| user_id                | references | null: false, foreign-key: true |
+| user                   | references | null: false, foreign-key: true |
 | name                   | string     | null: false |
 | info                   | text       | null: false |
 | category_id            | integer    | null: false |
@@ -49,8 +50,8 @@
 
 ### Association
 
-- belongs_to :users
-- has_one :orders
+- belongs_to :user
+- has_one :order
 
 ### Validation
 
@@ -60,23 +61,23 @@
 
 ## orders テーブル
 
-| Column  | Type       | Options                        |
-| ------- | ---------- | ------------------------------ |
-| user_id | references | null: false, foreign_key: true |
-| item_id | references | null: false, foreign_key: true unique: true |
+| Column | Type       | Options                        |
+| ------ | ---------- | ------------------------------ |
+| user   | references | null: false, foreign_key: true |
+| item   | references | null: false, foreign_key: true unique: true |
 
 ### Association
 
-- belongs_to :users
-- belongs_to :items
-- has_one :addresses
+- belongs_to :user
+- belongs_to :item
+- has_one :address
 
 
 ## addresses テーブル
 
 | Column        | Type       | Options                        |
 | ------------- | ---------- | ------------------------------ |
-| order_id      | references | null: false, foreign_key: true |
+| order         | references | null: false, foreign_key: true |
 | postal_code   | string     | null: false |
 | prefecture_id | integer    | null: false |
 | city          | string     | null: false |
@@ -86,7 +87,7 @@
 
 ### Association
 
-- belongs_to :orders
+- belongs_to :order
 
 ### Validation
 
