@@ -18,7 +18,7 @@ const pay = () => {
 
     payjp.createToken(numberElement).then(function (response) {
       if (response.error) {
-        console.log("PAY.JP error:", response.error);
+        form.submit();
       } else {
         const token = response.id;
         const tokenObj = `<input value="${token}" name="order_address[token]" type="hidden">`;
